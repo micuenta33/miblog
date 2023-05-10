@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles del Post</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <h1 class="navbar-brand">Salud & Fitness</h1>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/posts}">Inicio</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/posts/add}">Agregar nuevo post</a>
+            </li>
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/contact}" >Contacto</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container">
+    <div class="row" th:object="${onePost}" th:with="postId=${onePost.id}">
+        <div class="col-md-12">
+            <h2 th:text="${onePost.title}"></h2>
+            <hr>
+            <img class="card-img-top" th:src="${onePost.urlImg}" alt="Imagen del Post" style="width: 50%">
+            <p th:text="${onePost.description}"></p>
+            <p th:text="${onePost.createdDate}"></p>
+        </div>
+    </div>
+</div>
+</body>
+</html>

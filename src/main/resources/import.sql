@@ -1,0 +1,5 @@
+INSERT INTO posts (title, url_img, description, created_date) VALUES ('Cuatro recetas de preparar Tortitas de avena', 'http://localhost:63342/ejemploweb/static/img/huevo.jpg', 'Descripción del primer post', DATE '2022-01-01')
+INSERT INTO posts (title, url_img, description, created_date) VALUES ('Título del primer post', 'https://3.bp.blogspot.com/-s2MezUWS2Xs/WqRv9mjmjJI/AAAAAAAABXc/RZ2SEikIh8shQ-WcoG6Uogb3T8XN8YluQCLcBGAs/s1600/avena-cabello.jpg', 'Descripción del primer post', DATE '2022-01-01')
+INSERT INTO posts (title, url_img, description, created_date) VALUES ('Título del primer post', '', 'Descripción del primer post', DATE '2022-01-01')
+INSERT INTO posts (title, url_img, description, created_date) VALUES ('Título del primer post', 'https://example.com/imagen1.jpg', 'Descripción del primer post', DATE '2022-01-01')
+INSERT INTO posts (title, url_img, description, created_date) VALUES ('Título del primer post', 'http://localhost:63342/ejemploweb/static/img/huevo.jpg', 'Descripción del primer post', DATE '2022-01-01')

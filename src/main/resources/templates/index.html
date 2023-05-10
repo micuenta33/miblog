@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org"
+      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
+      layout:decorator="layout">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Salud & Fitness</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous"/>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <h1 class="navbar-brand">Salud & Fitness</h1>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/posts}" href="../templates/index.html">Inicio</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/posts/add}" href="../templates/add.html">Agregar nuevo post</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/contact}" href="../templates/contacto.html" >Contacto</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<!-- Agregar la sección para explicar de qué va la página web -->
+<div style="height: 100px; background-color: #f5f5f5;">
+<section>
+  <h2>Sobre nosotros</h2>
+  <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed viverra elit nulla, at laoreet ipsum dapibus quis. Vestibulum ante ipsum primis in faucibus orci luctus et ultrices posuere cubilia Curae; Donec condimentum, dolor id maximus sagittis, eros sapien aliquam velit, in volutpat massa libero quis velit. </p>
+</section>
+</div>
+<br>
+<br>
+<div class="container">
+  <div class="row">
+<!--card-->
+    <div th:each="post : ${listPosts}" class="card" style="width: 18rem;">
+      <img th:src="${post.urlImg}" class="card-img-top" src="" alt="Card image cap">
+      <div class="card-body">
+        <h5 th:text="${post.title}" class="card-title">Card title</h5>
+        <p th:text="${post.description}" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <a th:href="@{/posts/post/{id}(id=${post.id})}"  class="btn btn-primary">Ver post</a>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>
+
+
