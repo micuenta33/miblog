@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
+<head>
+  <meta charset="UTF-8"/>
+  <title>Salud & Fitness</title>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+  <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+  <!-- Los iconos tipo Solid de Fontawesome-->
+  <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+  <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+  <link rel="stylesheet" type="text/css" href="../static/css/sesion.css" th:href="@{/css/sesion.css}">
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+  <h1 class="navbar-brand">Salud & Fitness</h1>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+          aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse" id="navbarNav">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/posts}" href="../templates/index.html">Inicio</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/posts/add}" href="../templates/add.html">Agregar nuevo post</a>
+      </li>
+      <li class="nav-item">
+        <a class="nav-link" th:href="@{/contact}" href="contact.html" >Contacto</a>
+      </li>
+    </ul>
+  </div>
+</nav>
+<br>
+<div class="container-fluid h-100 ">
+  <div class="row justify-content-center align-items-center h-100 ">
+    <div class="col-md-4">
+      <div class="modal-content">
+        <div class="card-header">
+          <h1 class="text-center col-12 forgot">Registro de usuario</h1>
+          <form th:action="@{/registro}" th:object="${user}"  method="post" enctype="multipart/form-data" class="col-12">
+            <div class="form-group">
+              <input type="text" name="lastname" th:field="*{lastName}" placeholder="Nombre" class="form-control" required/>
+            </div>
+            <div class="form-group">
+              <input type="text" name="firstname" th:field="*{firstName}" placeholder="Apellido" class="form-control" required/>
+            </div>
+            <div class="form-group">
+              <input type="text" name="username" th:field="*{userName}" placeholder="Nombre de usuario" class="form-control" required/>
+            </div>
+            <div class="form-group">
+              <input type="email" name="email" th:field="*{email}" placeholder="Email" class="form-control" required/>
+            </div>
+            <div class="form-group">
+              <input type="password" name="password" th:field="*{password}" placeholder="Contraseña" class="form-control" required/>
+            </div>
+            <div class="form-group">
+              <input type="password"  name="confirmPassword" placeholder="Confirmar contraseña" class="form-control" required/>
+            </div>
+            <div class="text-center">
+            <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Registrar </button>
+            </div>
+          </form>
+        </div>
+        <div class="col-12 forgot">
+          <p class="text-center">¿Tienes cuenta? <a th:href="@{/}" href="../templates/sesion.html">Iniciar sesión</a></p>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+</body>
+</html>

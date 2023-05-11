@@ -1,16 +1,22 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
-      xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
-      layout:decorator="layout">
+<html lang="en" xmlns:th="http://www.thymeleaf.org">
 <head>
     <meta charset="UTF-8"/>
     <title>Salud & Fitness</title>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-          crossorigin="anonymous"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+
+    <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+    <!-- Los iconos tipo Solid de Fontawesome-->
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
+    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
+
+    <link rel="stylesheet" type="text/css" href="../static/css/sesion.css" th:href="@{/css/sesion.css}">
+
 </head>
 <body>
-<nav class="navbar navbar-expand-lg navbar-light bg-light">
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
     <h1 class="navbar-brand">Salud & Fitness</h1>
     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
             aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
@@ -25,30 +31,36 @@
                 <a class="nav-link" th:href="@{/posts/add}" href="../templates/add.html">Agregar nuevo post</a>
             </li>
             <li class="nav-item">
-                <a class="nav-link" th:href="@{/contact}" href="../templates/contacto.html" >Contacto</a>
+                <a class="nav-link" th:href="@{/contact}" href="contact.html" >Contacto</a>
             </li>
         </ul>
     </div>
 </nav>
-<div class="container">
-    <h1 class="text-center">Crear nuevo post</h1>
-    <form th:action="@{/posts/add}" th:object="${post}" method="post" enctype="multipart/form-data" class="mx-auto">
+<br/>
+<div class="container-fluid h-100 ">
+    <div class="row justify-content-center align-items-center h-100 ">
+        <div class="col-md-8">
+            <div class="modal-content">
+                <div class="card-header">
+    <h1 class="text-center col-12 forgot">Crear nuevo post</h1>
+    <form th:action="@{/posts/add}" th:object="${post}" method="post" enctype="multipart/form-data" class="col-12">
         <div class="form-group">
-            <label for="title">Titulo:</label>
-            <input type="text" id="title" name="title" th:field="*{title}" class="form-control"/>
+            <input type="text" id="title" name="title" th:field="*{title}" placeholder="Titulo" class="form-control"/>
         </div>
         <div class="form-group">
-            <label for="description">Descripcion:</label>
-            <textarea name="description" id="description" th:field="*{description}" rows="15" class="form-control" style="border-radius: 0;"></textarea>
+            <textarea name="description" id="description" th:field="*{description}" rows="15" placeholder="Descripcion" class="form-control" style="border-radius: 0;"></textarea>
         </div>
         <div class="form-group">
-            <label for="image">Imagen:</label>
-            <input type="url" id="image" th:field="*{urlImg}" name="image" class="form-control-file"/>
+            <input type="url" id="image" th:field="*{urlImg}" name="image" placeholder="Url Imagen" class="form-control-file"/>
         </div>
-        <div class="box-footer">
+        <div class="text-center">
             <button type="submit" class="btn btn-primary">Publicar</button>
         </div>
     </form>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 <footer>
     <!-- ... -->

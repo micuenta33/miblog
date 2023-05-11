@@ -5,12 +5,15 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.time.LocalDate;
+
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
 @Table(name = "users")
-public class User {
+public class User  {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -22,6 +25,12 @@ public class User {
     private String firstName;
     @Column(nullable = false)
     private String password;
+    @Transient
+    private String confirmPassword;
     @Column(unique = true,nullable = false)
     private String email;
+    @Enumerated(EnumType.STRING)
+    private UserRol userRol;
+    @Column(name = "register_date")
+    private LocalDate registerDate;
 }

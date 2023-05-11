@@ -3,7 +3,7 @@ package com.example.ejemploweb.controller;
 import com.example.ejemploweb.DTO.PostDTO;
 import com.example.ejemploweb.entity.Post;
 import com.example.ejemploweb.service.PostService;
-import org.springframework.beans.factory.annotation.Autowired;
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -15,8 +15,13 @@ import java.util.List;
 
 @Controller
 public class PostController {
-    @Autowired
-    private PostService postService;
+
+    private final PostService postService;
+
+
+    public PostController(PostService postService) {
+        this.postService = postService;
+    }
 
     @GetMapping("/posts")
     public String getAllPosts(Model model) {
