@@ -25,6 +25,9 @@
         <a class="nav-link" th:href="@{/posts}" href="../templates/index.html">Inicio</a>
       </li>
       <li class="nav-item">
+        <a class="nav-link" th:href="@{/sesion}" href="../templates/sesion.html">Iniciar sesión</a>
+      </li>
+      <li class="nav-item">
         <a class="nav-link" th:href="@{/posts/add}" href="../templates/add.html">Agregar nuevo post</a>
       </li>
       <li class="nav-item">
@@ -49,7 +52,7 @@
       <img th:src="${post.urlImg}" class="card-img-top" src="" alt="Card image cap">
       <div class="card-body">
         <h5 th:text="${post.title}" class="card-title">Card title</h5>
-        <p th:text="${post.description}" class="card-text">Some quick example text to build on the card title and make up the bulk of the card's content.</p>
+        <!--<p th:text="${post.description}" class="card-text"></p>-->
         <a th:href="@{/posts/post/{id}(id=${post.id})}"  class="btn btn-primary">Ver post</a>
       </div>
     </div>

@@ -7,7 +7,7 @@
           integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
           crossorigin="anonymous"/>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-    <link rel="stylesheet" type="text/css" href="../static/css/sesion.css" th:href="@{/css/sesion.css}">
+    <link rel="stylesheet" type="text/css" href="../static/css/post.css" th:href="@{/css/post.css}">
 
 </head>
 <body>
@@ -31,16 +31,28 @@
         </ul>
     </div>
 </nav>
-<div class="container">
-    <div class="row" th:object="${onePost}" th:with="postId=${onePost.id}">
-        <div class="col-md-12">
-            <h2 th:text="${onePost.title}"></h2>
-            <hr>
-            <img class="card-img-top" th:src="${onePost.urlImg}" alt="Imagen del Post" style="width: 50%">
-            <p th:text="${onePost.description}"></p>
-            <p th:text="${onePost.createdDate}"></p>
+<div class="container-fluid h-100 ">
+    <div class="row justify-content-center align-items-center h-100 ">
+        <div class="col-md-8">
+            <div class="modal-content">
+                <div class="card-header" >
+                    <div class="row" th:object="${onePost}" th:with="postId=${onePost.id}">
+                        <div class="col-md-12">
+                            <h2 th:text="${onePost.title}"></h2>
+                            <hr>
+                            <br>
+                            <img class="card-img-top" th:src="${onePost.urlImg}" alt="Imagen del Post" >
+                            <pre class="formatted-text" th:text="${onePost.description}"></pre>
+                            <p class="" th:text="${onePost.createdDate}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>
+</div>
+</div>
+
 </body>
 </html>

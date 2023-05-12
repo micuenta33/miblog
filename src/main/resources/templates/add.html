@@ -3,57 +3,60 @@
 <head>
     <meta charset="UTF-8"/>
     <title>Salud & Fitness</title>
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-
     <!-- FRAMEWORK BOOTSTRAP para el estilo de la pagina-->
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    <link rel="stylesheet"  href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    <!-- Los iconos tipo Solid de Fontawesome-->
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
-    <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
-
-    <link rel="stylesheet" type="text/css" href="../static/css/sesion.css" th:href="@{/css/sesion.css}">
+    <!-- API tinymce
+    <script src="https://cdn.tiny.cloud/1/w5qspk5012zxfyg3vw2vs32mvasaiuzmftv0h605lt1l1vk0/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script src="../static/js/textarea.js" th:src="@{/js/textarea.js}"></script>-->
+   <link rel="stylesheet" type="text/css" href="../static/css/sesion.css" th:href="@{/css/sesion.css}">
 
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-    <h1 class="navbar-brand">Salud & Fitness</h1>
-    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
-            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-        <ul class="navbar-nav ml-auto">
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/posts}" href="../templates/index.html">Inicio</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/posts/add}" href="../templates/add.html">Agregar nuevo post</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link" th:href="@{/contact}" href="contact.html" >Contacto</a>
-            </li>
-        </ul>
-    </div>
+   <h1 class="navbar-brand">Salud & Fitness</h1>
+   <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+           aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+       <span class="navbar-toggler-icon"></span>
+   </button>
+   <div class="collapse navbar-collapse" id="navbarNav">
+       <ul class="navbar-nav ml-auto">
+           <li class="nav-item">
+               <a class="nav-link" th:href="@{/posts}" href="../templates/index.html">Inicio</a>
+           </li>
+           <li class="nav-item">
+               <a class="nav-link" th:href="@{/posts/add}" href="../templates/add.html">Agregar nuevo post</a>
+           </li>
+           <li class="nav-item">
+               <a class="nav-link" th:href="@{/contact}" href="contact.html" >Contacto</a>
+           </li>
+       </ul>
+   </div>
 </nav>
-<br/>
 <div class="container-fluid h-100 ">
-    <div class="row justify-content-center align-items-center h-100 ">
-        <div class="col-md-8">
-            <div class="modal-content">
-                <div class="card-header">
-    <h1 class="text-center col-12 forgot">Crear nuevo post</h1>
-    <form th:action="@{/posts/add}" th:object="${post}" method="post" enctype="multipart/form-data" class="col-12">
-        <div class="form-group">
-            <input type="text" id="title" name="title" th:field="*{title}" placeholder="Titulo" class="form-control"/>
+   <div class="row justify-content-center align-items-center h-100 ">
+       <div class="col-md-8">
+           <div class="modal-content">
+               <div class="card-header" >
+   <h1 class="text-center col-12 forgot">Crear nuevo post</h1>
+   <form th:action="@{/posts/add}" th:object="${post}" method="post" enctype="multipart/form-data" class="col-12">
+       <div class="form-group">
+           <input type="text" id="title" name="title" th:field="*{title}" placeholder="Titulo" class="form-control" required/>
+       </div>
+       <div class="form-group">
+           <textarea name="description" id="description" th:field="*{description}"  contenteditable="true" rows="15" placeholder="Descripcion" class="form-control" required ></textarea>
+       </div>
+       <div class="form-group">
+           <input type="url" id="image" th:field="*{urlImg}" name="image" placeholder="Url Imagen" class="form-control-file"/>
+       </div>
+       <div class="form-group">
+           <select name="category" required>
+               <option >Selecciona una categoría</option>
+               <!-- Itera sobre la lista de categorías y crea una opción por cada una -->
+                <option  th:each="category : ${categories}" th:value="${category.id}" th:text="${category.description}"></option>
+            </select>
         </div>
-        <div class="form-group">
-            <textarea name="description" id="description" th:field="*{description}" rows="15" placeholder="Descripcion" class="form-control" style="border-radius: 0;"></textarea>
-        </div>
-        <div class="form-group">
-            <input type="url" id="image" th:field="*{urlImg}" name="image" placeholder="Url Imagen" class="form-control-file"/>
-        </div>
-        <div class="text-center">
+        <div class="text-center ">
             <button type="submit" class="btn btn-primary">Publicar</button>
         </div>
     </form>
