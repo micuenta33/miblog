@@ -5,5 +5,5 @@ import com.example.ejemploweb.entity.User;
 
 
 public interface UserService {
-     void createUser(UserDTO userDTO);
+     User createUser(UserDTO userDTO) throws Exception;
 }

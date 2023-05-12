@@ -5,6 +5,7 @@ import com.example.ejemploweb.entity.User;
 import com.example.ejemploweb.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
+import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -24,13 +25,19 @@ public class UserController {
     }
     @GetMapping("/registro")
     public String getRegistro(Model model) {
-        User user = new User();
+        UserDTO user = new UserDTO();
         model.addAttribute("user",user);
         return "register";
     }
     @PostMapping("/registro")
-    public String getRegistro(@ModelAttribute("user") UserDTO userDTO) {
-             userService.createUser(userDTO);
+    public String getRegistro(@ModelAttribute("user") UserDTO userDTO,Model model) {
+        try {
+            userService.createUser(userDTO);
+        } catch (Exception e) {
+            model.addAttribute("errorMessage",e.getMessage());
+            return "register";
+        }
         return "redirect:/";
     }
+
 }

@@ -7,6 +7,8 @@ import com.example.ejemploweb.repository.UserRepository;
 import com.example.ejemploweb.service.UserService;
 import org.springframework.stereotype.Service;
 
+import java.util.Optional;
+
 @Service
 public class UserServiceImpl implements UserService {
 
@@ -19,9 +21,27 @@ public class UserServiceImpl implements UserService {
         this.userInDtoToUser = userInDtoToUser;
     }
 
-    @Override
-    public void createUser(UserDTO userDTO) {
+    private boolean checkExistEmail(UserDTO userDTO) throws Exception {
         User user = userInDtoToUser.map(userDTO);
-        userRepository.save(user);
+        Optional<User> exist  = userRepository.findByEmailOrUserName(user.getEmail(),user.getUserName());
+        if(exist.isPresent()){
+            throw new Exception("EL email o el usuario ya existe ");
+        }
+        return true;
     }
+    private boolean checkPassword(UserDTO userDTO) throws Exception {
+        if(!userDTO.getPassword().equals(userDTO.getConfirmPassword())){
+            throw new Exception("Las contraseñas no coinciden");
+        }
+        return true;
+    }
+    @Override
+    public User createUser(UserDTO userDTO) throws Exception {
+        User user = userInDtoToUser.map(userDTO);
+        if(checkExistEmail(userDTO) && checkPassword(userDTO)){
+           user= userRepository.save(user);
+        }
+        return user;
+    }
+
 }
