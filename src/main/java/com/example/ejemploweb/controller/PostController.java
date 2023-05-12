@@ -1,15 +1,14 @@
 package com.example.ejemploweb.controller;
 
 import com.example.ejemploweb.DTO.PostDTO;
+import com.example.ejemploweb.entity.CategoryPost;
 import com.example.ejemploweb.entity.Post;
+import com.example.ejemploweb.service.CategoryPostService;
 import com.example.ejemploweb.service.PostService;
 
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -17,10 +16,11 @@ import java.util.List;
 public class PostController {
 
     private final PostService postService;
+    private final CategoryPostService categoryPostService;
 
-
-    public PostController(PostService postService) {
+    public PostController(PostService postService, CategoryPostService categoryPostService) {
         this.postService = postService;
+        this.categoryPostService = categoryPostService;
     }
 
     @GetMapping("/posts")
@@ -36,12 +36,15 @@ public class PostController {
     }
     @GetMapping("/posts/add")
     public String formNwePost(Model model){
-        Post post = new Post();
+        PostDTO post = new PostDTO();
         model.addAttribute("post",post);
+        model.addAttribute("categories",categoryPostService.getAllCategoryPost());
         return "add";
     }
     @PostMapping("/posts/add")
-    public String addNewPost(@ModelAttribute("post") PostDTO postDTO){
+    public String addNewPost(@ModelAttribute("post") PostDTO postDTO,@RequestParam("category") Long categoryId){
+        CategoryPost categoryPost=categoryPostService.getCategoryById(categoryId);
+        postDTO.setCategoryPost(categoryPost);
         postService.addPost(postDTO);
         return "redirect:/posts";
     }

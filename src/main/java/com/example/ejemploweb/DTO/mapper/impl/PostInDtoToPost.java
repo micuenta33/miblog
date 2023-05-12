@@ -14,6 +14,7 @@ public class PostInDtoToPost implements IMapper<PostDTO, Post> {
         post.setTitle(in.getTitle());
         post.setDescription(in.getDescription());
         post.setUrlImg(in.getUrlImg());
+        post.setCategory(in.getCategoryPost());
         post.setCreatedDate(LocalDate.now());
         return post;
     }
