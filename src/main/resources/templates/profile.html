@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Mi Perfil</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../static/css/sesion.css" th:href="@{/css/sesion.css}">
+</head>
+<body>
+<div th:if="${oneUser}" class="container-fluid h-100">
+    <div class="row justify-content-center align-items-center h-100">
+        <div class="col-md-4">
+            <div class="modal-content">
+                <div class="card-header">
+                    <h1 class="text-center col-12 forgot">Mi Perfil</h1>
+                    <h2 class="text-center col-12 forgot">Datos de Usuario</h2>
+                    <div class="card" th:object="${oneUser}" th:with="id=${oneUser.id}">
+                        <div class="form-group">
+                            <p>Nombre: <span th:text="${oneUser.lastName}"></span></p>
+                        </div>
+                        <div>
+                            <p>Apellido: <span th:text="${oneUser.firstName}"></span></p>
+                        </div>
+                        <div>
+                            <p>Nombre de Usuario: <span th:text="${oneUser.userName}"></span></p>
+                        </div>
+                        <div>
+                            <p>Correo Electrónico: <span th:text="${oneUser.email}"></span></p>
+                        </div>
+                        <div class="alert alert-danger text-center" th:if="${errorMessage}" th:text="${errorMessage}">Error MEssage</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div th:unless="${oneUser}" class="container-fluid h-100">
+    <div class="row justify-content-center align-items-center h-100">
+        <div class="col-md-4">
+            <div class="modal-content">
+                <div class="card-header">
+                    <h1 class="text-center col-12 forgot">Mi Perfil</h1>
+                    <h2 class="text-center col-12 forgot">Datos de Usuario</h2>
+                    <div class="alert alert-danger text-center" th:if="${errorMessage}" th:text="${errorMessage}"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div th:if="${oneUser}" class="text-center">
+    <a class="btn btn-primary" th:href="@{/user/edit/{id}(id=${oneUser.id})}" href="../templates/edit.html">Editar</a>
+</div>
+
+</body>
+</html>
