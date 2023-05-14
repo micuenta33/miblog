@@ -21,14 +21,21 @@ public class UserServiceImpl implements UserService {
         this.userInDtoToUser = userInDtoToUser;
     }
 
-    private boolean checkExistEmail(UserDTO userDTO) throws Exception {
+    private boolean checkExistEmailAndUserName(UserDTO userDTO) throws Exception {
         User user = userInDtoToUser.map(userDTO);
         Optional<User> exist  = userRepository.findByEmailOrUserName(user.getEmail(),user.getUserName());
         if(exist.isPresent()){
-            throw new Exception("EL email o el usuario ya existe ");
+            throw new Exception("EL email o el nombre usuario ya existe ");
         }
         return true;
     }
+    /*private  boolean checkAvailableUserName(UserDTO userDTO) throws Exception {
+        User user = userInDtoToUser.map(userDTO);
+        Optional<User> exist = userRepository.findByUserName(user.getUserName());
+        if(exist.isPresent()) {
+            throw new Exception("EL nombre usuario  ya existe ");
+        }
+    }*/
     private boolean checkPassword(UserDTO userDTO) throws Exception {
         if(!userDTO.getPassword().equals(userDTO.getConfirmPassword())){
             throw new Exception("Las contraseñas no coinciden");
@@ -38,10 +45,26 @@ public class UserServiceImpl implements UserService {
     @Override
     public User createUser(UserDTO userDTO) throws Exception {
         User user = userInDtoToUser.map(userDTO);
-        if(checkExistEmail(userDTO) && checkPassword(userDTO)){
+        if(checkExistEmailAndUserName(userDTO) && checkPassword(userDTO)){
            user= userRepository.save(user);
         }
         return user;
     }
+
+    @Override
+    public User getOneUser(Long id) throws Exception {
+        return userRepository.findById(id).orElseThrow(()->new Exception("El usuario  no existe")) ;
+    }
+
+    @Override
+    public User updateOneUser(Long id,UserDTO userDTO) throws Exception {
+            User userUpdate =userRepository.findById(id).get();
+            userUpdate.setLastName(userDTO.getLastName());
+            userUpdate.setFirstName(userDTO.getFirstName());
+            userUpdate.setUserName(userDTO.getUserName());
+            userUpdate.setEmail(userDTO.getEmail());
+            return userRepository.save(userUpdate);
+    }
+
 
 }

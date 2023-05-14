@@ -5,9 +5,9 @@ import com.example.ejemploweb.entity.User;
 import com.example.ejemploweb.service.UserService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.ui.ModelMap;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 @Controller
@@ -30,7 +30,7 @@ public class UserController {
         return "register";
     }
     @PostMapping("/registro")
-    public String getRegistro(@ModelAttribute("user") UserDTO userDTO,Model model) {
+    public String register(@ModelAttribute("user") UserDTO userDTO,Model model) {
         try {
             userService.createUser(userDTO);
         } catch (Exception e) {
@@ -39,5 +39,35 @@ public class UserController {
         }
         return "redirect:/";
     }
+    @GetMapping("/user/{id}")
+    public String getOneUser(@PathVariable Long id, Model model) {
+        try {
+            model.addAttribute("oneUser",userService.getOneUser(id));
+        } catch (Exception e) {
+            model.addAttribute("errorMessage",e.getMessage());
+        }
+        return "profile";
+    }
+
+    @GetMapping("/user/edit/{id}")
+    public String getOneUserEdit(@PathVariable Long id, Model model) {
+        try {
+            model.addAttribute("oneUser",userService.getOneUser(id));
+        } catch (Exception e) {
+            model.addAttribute("errorMessage",e.getMessage());
+            System.out.println(e.getMessage());
+        }
+        return "edit";
+    }
+    @PostMapping("/user/edit/{id}")
+    public String OneUserEdit(@PathVariable Long id,@ModelAttribute UserDTO userDTO , Model model)  {
+        try {
+            userService.updateOneUser(id,userDTO);
+        } catch (Exception e) {
+            throw new RuntimeException(e);
+        }
+        return "redirect:/user/{id}";
+    }
+
 
 }
