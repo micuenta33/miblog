@@ -58,12 +58,14 @@
                         </div>
                         <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Iniciar sesión</button>
                     </form>
+            <div class="alert alert-success" th:if="${param.message}">
+                <p th:text="${param.message}"></p>
+            </div>
             <div class="col-12 forgot">
                 <p><a href="#">Recordar contrasena?</a></p>
                 <p >¿No tienes cuenta? <a th:href="@{/registro}" href="../templates/register.html" >Regístrate aquí</a></p>
             </div>
                 </div>
-
             </div>
         </div>
     </div>

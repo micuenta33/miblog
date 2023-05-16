@@ -1,5 +1,6 @@
 package com.example.ejemploweb.service.impl;
 
+import com.example.ejemploweb.DTO.ChangePasswordUser;
 import com.example.ejemploweb.DTO.UserDTO;
 import com.example.ejemploweb.DTO.mapper.impl.UserInDtoToUser;
 import com.example.ejemploweb.entity.User;
@@ -64,6 +65,29 @@ public class UserServiceImpl implements UserService {
             userUpdate.setUserName(userDTO.getUserName());
             userUpdate.setEmail(userDTO.getEmail());
             return userRepository.save(userUpdate);
+    }
+
+    @Override
+    public void deleteUser(Long id) throws Exception {
+        User user = getOneUser(id);
+        userRepository.delete(user);
+    }
+
+    @Override
+    public User changePassword(ChangePasswordUser changePasswordUser) throws Exception {
+        User user = getOneUser(changePasswordUser.getId());
+        if(!user.getPassword().equals(changePasswordUser.getCurrentPassword())) {
+            throw new Exception("La contraseña actual incorrecta");
+        }
+        if(user.getPassword().equals(changePasswordUser.getNewPassword())) {
+            throw new Exception("La nueva contraseña debe ser diferente a la actual");
+        }
+        if(!changePasswordUser.getNewPassword().equals(changePasswordUser.getConfirmPassword())) {
+            throw new Exception("La nueva contraseña no coincide");
+        }
+        user.setPassword(changePasswordUser.getNewPassword());
+
+        return userRepository.save(user);
     }
 
 

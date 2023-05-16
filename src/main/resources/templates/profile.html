@@ -12,23 +12,23 @@
 <body>
 <div th:if="${oneUser}" class="container-fluid h-100">
     <div class="row justify-content-center align-items-center h-100">
-        <div class="col-md-4">
+        <div class="col-md-5">
             <div class="modal-content">
                 <div class="card-header">
                     <h1 class="text-center col-12 forgot">Mi Perfil</h1>
                     <h2 class="text-center col-12 forgot">Datos de Usuario</h2>
                     <div class="card" th:object="${oneUser}" th:with="id=${oneUser.id}">
                         <div class="form-group">
-                            <p>Nombre: <span th:text="${oneUser.lastName}"></span></p>
+                            <p><b>Nombre:</b> <span th:text="${oneUser.lastName}"></span></p>
                         </div>
-                        <div>
-                            <p>Apellido: <span th:text="${oneUser.firstName}"></span></p>
+                        <div class="form-group">
+                            <p><b>Apellido:</b> <span th:text="${oneUser.firstName}"></span></p>
                         </div>
-                        <div>
-                            <p>Nombre de Usuario: <span th:text="${oneUser.userName}"></span></p>
+                        <div class="form-group">
+                            <p><b>Nombre de Usuario:</b> <span th:text="${oneUser.userName}"></span></p>
                         </div>
-                        <div>
-                            <p>Correo Electrónico: <span th:text="${oneUser.email}"></span></p>
+                        <div class="form-group">
+                            <p><b>Correo Electrónico:</b> <span th:text="${oneUser.email}"></span></p>
                         </div>
                         <div class="alert alert-danger text-center" th:if="${errorMessage}" th:text="${errorMessage}">Error MEssage</div>
                     </div>
@@ -53,7 +53,7 @@
 </div>
 <div th:if="${oneUser}" class="text-center">
     <a class="btn btn-primary" th:href="@{/user/edit/{id}(id=${oneUser.id})}" href="../templates/edit.html">Editar</a>
+    <a class="btn btn-danger"  th:href="@{/user/delete/{id}(id=${oneUser.id})}" th:onclick="return confirm('¿Está seguro de que desea eliminar su perfil?')" >Eliminar</a>
 </div>
-
 </body>
 </html>
