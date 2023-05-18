@@ -24,14 +24,18 @@
       <li class="nav-item">
         <a class="nav-link" th:href="@{/posts}" href="../templates/index.html">Inicio</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/}" href="../templates/sesion.html">Iniciar sesión</a>
-      </li>
-      <li class="nav-item">
+      <li class="nav-item" th:if="${#authentication.getPrincipal().getUsername() != null}">
         <a class="nav-link" th:href="@{/posts/add}" href="../templates/add.html">Agregar nuevo post</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" th:href="@{/contact}" href="contact.html" >Contacto</a>
+      </li>
+      <li class="nav-item" th:if="${#authentication. != null}">
+        <a class="nav-link" href="#" th:href="@{/logout}">
+          <span th:text="${#authentication.getPrincipal().getUsername()}"></span> -
+          <span>logout</span>
+          <span class="float-right"><i class="fas fa-sign-out-alt"></i></span>
+        </a>
       </li>
     </ul>
   </div>

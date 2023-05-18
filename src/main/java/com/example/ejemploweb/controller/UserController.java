@@ -21,9 +21,9 @@ public class UserController {
         this.userService = userService;
     }
 
-    @GetMapping("/")
-    public String getindex(Model model) {
-        return "sesion";
+    @GetMapping("/login")
+    public String getlogin(Model model) {
+        return "login";
     }
     @GetMapping("/registro")
     public String getRegistro(Model model) {
@@ -39,7 +39,7 @@ public class UserController {
             model.addAttribute("errorMessage",e.getMessage());
             return "register";
         }
-        return "redirect:/";
+        return "redirect:/posts";
     }
     @GetMapping("/user/{id}")
     public String getOneUser(@PathVariable Long id, Model model) {
@@ -75,7 +75,7 @@ public class UserController {
             userService.deleteUser(id);
             redirectAttributes.addFlashAttribute("message", "El usuario ha sido eliminado correctamente");        } catch (Exception e) {
         }
-        return getindex(model);
+        return getlogin(model);
     }
     @GetMapping("/user/changepassworduser/{id}")
     public String changePasswordUserform(@PathVariable Long id, Model model ){
