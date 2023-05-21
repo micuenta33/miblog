@@ -54,6 +54,7 @@
 <div th:if="${oneUser}" class="text-center">
     <a class="btn btn-primary" th:href="@{/user/edit/{id}(id=${oneUser.id})}" href="../templates/edit.html">Editar</a>
     <a class="btn btn-danger"  th:href="@{/user/delete/{id}(id=${oneUser.id})}" th:onclick="return confirm('¿Está seguro de que desea eliminar su perfil?')" >Eliminar</a>
+    <a class="btn btn-secondary"  th:href="@{/posts}">Volver</a>
 </div>
 </body>
 </html>

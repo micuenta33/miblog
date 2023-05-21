@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html xmlns:th="http://www.thymeleaf.org"
+<html xmlns:th="http://www.thymeleaf.org" xmlns:sec="http://www.thymeleaf.org/extras/spring-security"
 xmlns:layout="http://www.ultraq.net.nz/thymeleaf/layout"
 layout:decorator="layout">
 <head>
@@ -23,9 +23,6 @@ layout:decorator="layout">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
         <a class="nav-link" th:href="@{/posts}" href="../templates/index.html">Inicio</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/posts/add}" href="../templates/add.html">Agregar nuevo post</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" th:href="@{/contact}" href="contact.html" >Contacto</a>

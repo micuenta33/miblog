@@ -31,7 +31,7 @@ public class User  {
     private String confirmPassword;
     @Column(unique = true,nullable = false)
     private String email;
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER, cascade = {CascadeType.ALL, CascadeType.REMOVE})
     @JoinTable(
             name = "users_roles",
             joinColumns = {@JoinColumn(name = "user_id", referencedColumnName = "id")},
@@ -40,7 +40,7 @@ public class User  {
     private List<Role> roles = new ArrayList<>();
     @Column(name = "register_date")
     private LocalDate registerDate;
-    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL)
+    @OneToMany(mappedBy = "user", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<Post> posts;
 
 

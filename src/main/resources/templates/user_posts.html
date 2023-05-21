@@ -38,7 +38,7 @@
            aria-haspopup="true" aria-expanded="false">
           <span sec:authentication="name">Bob</span>
         </a>
-          <div class="dropdown-menu dropdown-menu-right" th:object="${user}">
+        <div class="dropdown-menu dropdown-menu-right" th:object="${user}">
           <a class="dropdown-item" th:href="@{/user/{id}(id=${user.id})}" >Perfil</a>
           <a class="dropdown-item" th:href="@{/posts/add}" >Agregar nuevo post</a>
           <a class="dropdown-item" th:href="@{/contact}" >Contacto</a>
@@ -53,23 +53,12 @@
     </ul>
   </div>
 </nav>
-
-<!-- Agregar la sección para explicar de qué va la página web -->
-<div style="color: white;" >
-<section>
-  <h2>Sobre nosotros</h2>
-  <p>¡Bienvenido a nuestra página web dedicada a la salud y el fitness! Aquí encontrarás un espacio diseñado
-    especialmente para publicar y compartir información sobre entrenamiento, nutrición y deporte.
-    Nuestro objetivo es brindarte un lugar donde puedas encontrar contenido relevante y
-    útil para mantener un estilo de vida saludable y activo.</p>
-</section>
-</div>
 <br>
 <br>
 <div class="container">
   <div class="row">
-<!--card-->
-    <div th:each="post : ${listPosts}" class="card" style="width: 18rem;">
+    <!--card-->
+    <div th:each="post : ${posts}" class="card" style="width: 18rem;">
       <img th:src="${post.urlImg}" class="card-img-top" src="" alt="Card image cap">
       <div class="card-body">
         <h5 th:text="${post.title}" class="card-title">Card title</h5>
@@ -81,5 +70,3 @@
 </div>
 </body>
 </html>
-
-

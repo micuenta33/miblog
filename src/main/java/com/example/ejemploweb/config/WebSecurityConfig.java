@@ -3,7 +3,6 @@ package com.example.ejemploweb.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
@@ -35,12 +34,12 @@ public class WebSecurityConfig {
         http
                 .authorizeHttpRequests((requests) -> requests
                         .requestMatchers(resources).permitAll()
-                        .requestMatchers("/registro", "/posts").permitAll()
+                        .requestMatchers("/registro","/", "/posts","/posts/**","/contact").permitAll()
                         .anyRequest().authenticated()
                 )
                 .formLogin((form) -> form
                         .loginPage("/login")
-                        .defaultSuccessUrl("/")
+                        .defaultSuccessUrl("/posts")
                         .loginProcessingUrl("/login")
                         .failureUrl("/login?error=true")
                         .passwordParameter("password")

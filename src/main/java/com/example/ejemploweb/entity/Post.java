@@ -25,7 +25,7 @@ public class Post {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-    @ManyToOne(cascade = CascadeType.ALL)
+    @ManyToOne(cascade = CascadeType.PERSIST)
     @JoinColumn(name = "category_id")
     private CategoryPost category;
     @Column(name = "created_date")

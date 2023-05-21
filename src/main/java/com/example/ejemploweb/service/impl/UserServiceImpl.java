@@ -4,8 +4,10 @@ import com.example.ejemploweb.DTO.ChangePasswordUser;
 import com.example.ejemploweb.DTO.UserDTO;
 import com.example.ejemploweb.DTO.mapper.impl.UserInDtoToUser;
 import com.example.ejemploweb.entity.User;
+import com.example.ejemploweb.repository.PostRepository;
 import com.example.ejemploweb.repository.UserRepository;
 import com.example.ejemploweb.service.UserService;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.Optional;
@@ -15,11 +17,16 @@ public class UserServiceImpl implements UserService {
 
     private final UserRepository userRepository;
     private final UserInDtoToUser userInDtoToUser;
+    private final PasswordEncoder passwordEncoder;
+    private final PostRepository postRepository;
 
 
-    public UserServiceImpl(UserRepository userRepository, UserInDtoToUser userInDtoToUser) {
+
+    public UserServiceImpl(UserRepository userRepository, UserInDtoToUser userInDtoToUser, PasswordEncoder passwordEncoder, PostRepository postRepository) {
         this.userRepository = userRepository;
         this.userInDtoToUser = userInDtoToUser;
+        this.passwordEncoder = passwordEncoder;
+        this.postRepository = postRepository;
     }
 
     private boolean checkExistEmailAndUserName(UserDTO userDTO) throws Exception {
@@ -30,13 +37,6 @@ public class UserServiceImpl implements UserService {
         }
         return true;
     }
-    /*private  boolean checkAvailableUserName(UserDTO userDTO) throws Exception {
-        User user = userInDtoToUser.map(userDTO);
-        Optional<User> exist = userRepository.findByUserName(user.getUserName());
-        if(exist.isPresent()) {
-            throw new Exception("EL nombre usuario  ya existe ");
-        }
-    }*/
     private boolean checkPassword(UserDTO userDTO) throws Exception {
         if(!userDTO.getPassword().equals(userDTO.getConfirmPassword())){
             throw new Exception("Las contraseñas no coinciden");
@@ -68,15 +68,16 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(Long id) throws Exception {
-        User user = getOneUser(id);
-        userRepository.delete(user);
+    public void deleteUser(Long id)  {
+        User user=userRepository.findById(id).get();
+        userRepository.deleteById(id);
     }
-
     @Override
     public User changePassword(ChangePasswordUser changePasswordUser) throws Exception {
         User user = getOneUser(changePasswordUser.getId());
         if(!user.getPassword().equals(changePasswordUser.getCurrentPassword())) {
+            System.out.println(changePasswordUser.getCurrentPassword());
+            System.out.println(user.getPassword());
             throw new Exception("La contraseña actual incorrecta");
         }
         if(user.getPassword().equals(changePasswordUser.getNewPassword())) {
@@ -85,8 +86,7 @@ public class UserServiceImpl implements UserService {
         if(!changePasswordUser.getNewPassword().equals(changePasswordUser.getConfirmPassword())) {
             throw new Exception("La nueva contraseña no coincide");
         }
-        user.setPassword(changePasswordUser.getNewPassword());
-
+        user.setPassword(passwordEncoder.encode(changePasswordUser.getNewPassword()));
         return userRepository.save(user);
     }
 
