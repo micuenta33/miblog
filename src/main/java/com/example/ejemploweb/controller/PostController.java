@@ -36,7 +36,6 @@ public class PostController {
         List<Post> listaPosts = postService.getAllPosts();
         model.addAttribute("listPosts", listaPosts);
         Authentication auth = SecurityContextHolder.getContext().getAuthentication();
-        System.out.println();
         if(!auth.getPrincipal().equals("anonymousUser")){
             User user = userRepository.findByUserName(auth.getName()).get();
             model.addAttribute("user", user);
@@ -51,11 +50,10 @@ public class PostController {
     }
 
     @GetMapping("/posts/add")
-    public String formNwePost(Model model,Authentication auth) {
+    public String formNwePost(Model model) {
         PostDTO post = new PostDTO();
         model.addAttribute("post", post);
         model.addAttribute("categories", categoryPostService.getAllCategoryPost());
-         //auth = SecurityContextHolder.getContext().getAuthentication();
 
         return "add";
     }

@@ -21,8 +21,11 @@ public class Contact {
     @Column(nullable = false)
     private String name;
 
-    @Column(nullable = false, unique = true)
+    @Column(nullable = false)
     private String email;
+
+    @Column(nullable = false)
+    private String subject;
 
     @Column(nullable = false)
     private String message;

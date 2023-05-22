@@ -40,6 +40,7 @@
         </a>
           <div class="dropdown-menu dropdown-menu-right" th:object="${user}">
           <a class="dropdown-item" th:href="@{/user/{id}(id=${user.id})}" >Perfil</a>
+          <a class="dropdown-item" th:href="@{/user/posts/{id}(id=${user.id})}" >Mis posts</a>
           <a class="dropdown-item" th:href="@{/posts/add}" >Agregar nuevo post</a>
           <a class="dropdown-item" th:href="@{/contact}" >Contacto</a>
           <div class="dropdown-item" aria-labelledby="dropdownMenuLink">
@@ -53,7 +54,6 @@
     </ul>
   </div>
 </nav>
-
 <!-- Agregar la sección para explicar de qué va la página web -->
 <div style="color: white;" >
 <section>

@@ -50,18 +50,18 @@ public class UserController {
         }
         return "profile";
     }
-    @GetMapping("/user/posts/{userId}")
-    public String getPublishedPostsByUser(@PathVariable Long userId, Model model) {
+    @GetMapping("/user/posts/{id}")
+    public String getPublishedPostsByUser(@PathVariable Long id, Model model) {
         try {
-            User user = userService.getOneUser(userId);
+            User user = userService.getOneUser(id);
             List<Post> publishedPosts = postService.getPublishedPostsByUser(user);
-            System.out.println(publishedPosts.size());
             model.addAttribute("user", user);
             model.addAttribute("posts", publishedPosts);
             return "user_posts" ;
         } catch (Exception e) {
             // Manejo de excepciones
             model.addAttribute("error", e.getMessage());
+            System.out.println(e.getStackTrace());
             return "error";
         }
     }

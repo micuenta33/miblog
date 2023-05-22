@@ -10,6 +10,11 @@ import org.springframework.stereotype.Component;
 public class ContactInDtoToContact implements IMapper<ContactDTO, Contact> {
     @Override
     public Contact map(ContactDTO in) {
-        return null;
+        Contact contact=new Contact();
+        contact.setName(in.getName());
+        contact.setEmail(in.getEmail());
+        contact.setSubject(in.getSubject());
+        contact.setMessage(in.getMessage());
+        return contact;
     }
 }
