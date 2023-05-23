@@ -7,7 +7,7 @@
         integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
         crossorigin="anonymous"/>
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
-  <link rel="stylesheet" type="text/css" href="../static/css/sesion.css" th:href="@{/css/sesion.css}">
+  <link rel="stylesheet" type="text/css" href="../../static/css/index.css" th:href="@{/css/index.css}">
 </head>
 <body>
 <div class="container-fluid h-100 ">
@@ -16,7 +16,7 @@
       <div class="modal-content">
         <div class="card-header">
           <h1 class="text-center col-12 forgot">Editar perfil</h1>
-<form th:action="@{/user/edit/{id}(id=${oneUser.id})}" th:object="${oneUser}"   method="post" >
+<form th:if="${oneUser}" th:action="@{/user/edit/{id}(id=${oneUser.id})}"  th:object="${oneUser}"   method="post" >
   <label for="lastname">Nombre</label>
   <div class="form-group">
     <input type="text" id="lastname" name="name" th:value="${oneUser.lastName}" th:field="*{lastName}"/>
@@ -33,16 +33,13 @@
   <div class="form-group">
     <input type="email" id="email" name="email" th:value="${oneUser.email}" th:field="*{email}"/>
   </div>
-  <div class="form-group row">
-
-      <div class="text-center">
-        <button type="submit" class="btn btn-primary"><i class="fas fa-sign-in-alt"></i> Guardar cambios </button>
-        <a class="btn btn-secondary"  th:href="@{/user/{id}(id=${oneUser.id})}"> Cancel   </a>
-      </div>
-  </div>
+    <div class="text-center ">
+      <button type="submit" class="btn btn-primary"> Guardar cambios </button>
+      <a class="btn btn-secondary"  th:href="@{/user/{id}(id=${oneUser.id})}"> Cancel   </a>
+    </div>
   <div class="alert alert-danger text-center" th:if="${errorMessage}" th:text="${errorMessage}">Error MEssage</div>
 </form>
-          <div class="modal-footer">
+          <div class="modal-footer" th:if="${oneUser}">
             <a th:href="@{/user/changepassworduser/{id}(id=${oneUser.id})}" href="changepassworduser.html" >Cambiar contraseña</a>
           </div>
         </div>

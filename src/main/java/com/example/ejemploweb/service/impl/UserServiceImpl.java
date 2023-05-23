@@ -4,6 +4,7 @@ import com.example.ejemploweb.DTO.ChangePasswordUser;
 import com.example.ejemploweb.DTO.UserDTO;
 import com.example.ejemploweb.DTO.mapper.impl.UserInDtoToUser;
 import com.example.ejemploweb.entity.User;
+import com.example.ejemploweb.exception.user.UserNameOrIdNotFund;
 import com.example.ejemploweb.repository.PostRepository;
 import com.example.ejemploweb.repository.UserRepository;
 import com.example.ejemploweb.service.UserService;
@@ -53,13 +54,13 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User getOneUser(Long id) throws Exception {
-        return userRepository.findById(id).orElseThrow(()->new Exception("El usuario  no existe")) ;
+    public User getOneUser(Long id) throws UserNameOrIdNotFund {
+        return userRepository.findById(id).orElseThrow(()->new UserNameOrIdNotFund("El usuario  no existe")) ;
     }
 
     @Override
-    public User updateOneUser(Long id,UserDTO userDTO) throws Exception {
-            User userUpdate =userRepository.findById(id).get();
+    public User updateOneUser(Long id,UserDTO userDTO) throws UserNameOrIdNotFund {
+            User userUpdate =getOneUser(id);
             userUpdate.setLastName(userDTO.getLastName());
             userUpdate.setFirstName(userDTO.getFirstName());
             userUpdate.setUserName(userDTO.getUserName());
@@ -68,16 +69,14 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public void deleteUser(Long id)  {
-        User user=userRepository.findById(id).get();
+    public void deleteUser(Long id) throws UserNameOrIdNotFund {
+        User user=getOneUser(id);
         userRepository.deleteById(id);
     }
     @Override
     public User changePassword(ChangePasswordUser changePasswordUser) throws Exception {
         User user = getOneUser(changePasswordUser.getId());
-        if(!user.getPassword().equals(changePasswordUser.getCurrentPassword())) {
-            System.out.println(changePasswordUser.getCurrentPassword());
-            System.out.println(user.getPassword());
+        if(!passwordEncoder.matches(changePasswordUser.getCurrentPassword(), user.getPassword())) {
             throw new Exception("La contraseña actual incorrecta");
         }
         if(user.getPassword().equals(changePasswordUser.getNewPassword())) {

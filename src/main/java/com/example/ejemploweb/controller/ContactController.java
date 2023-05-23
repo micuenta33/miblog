@@ -34,7 +34,7 @@ public class ContactController {
             contactDTO.setName(user.getLastName()+" "+user.getFirstName());
         }
         model.addAttribute("contactDTO", contactDTO);
-        return "contact";
+        return "contact/contact";
     }
     @PostMapping("/contact")
     public String Contact(@ModelAttribute("contact") ContactDTO contactDTO, Model model) {

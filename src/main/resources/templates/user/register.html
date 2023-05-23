@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
   <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 
-  <link rel="stylesheet" type="text/css" href="../static/css/sesion.css" th:href="@{/css/sesion.css}">
+  <link rel="stylesheet" type="text/css" href="../../static/css/index.css" th:href="@{/css/index.css}">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -24,10 +24,10 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item">
-        <a class="nav-link" th:href="@{/posts}" href="../templates/index.html">Inicio</a>
+        <a class="nav-link" th:href="@{/posts}" href="../index.html">Inicio</a>
       </li>
       <li class="nav-item">
-        <a class="nav-link" th:href="@{/contact}" href="contact.html" >Contacto</a>
+        <a class="nav-link" th:href="@{/contact}" href="../contact/contact.html" >Contacto</a>
       </li>
     </ul>
   </div>
@@ -65,7 +65,7 @@
           </form>
         </div>
         <div class="col-12 forgot">
-          <p class="text-center">¿Tienes cuenta? <a th:href="@{/}" href="login.html">Iniciar sesión</a></p>
+          <p class="text-center">¿Tienes cuenta? <a th:href="@{/}" href="../login.html">Iniciar sesión</a></p>
         </div>
       </div>
     </div>

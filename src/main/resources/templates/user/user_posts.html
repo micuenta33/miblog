@@ -12,7 +12,7 @@
   <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.8/css/solid.css">
   <script src="https://use.fontawesome.com/releases/v5.0.7/js/all.js"></script>
 
-  <link rel="stylesheet" type="text/css" href="../static/css/sesion.css" th:href="@{/css/sesion.css}">
+  <link rel="stylesheet" type="text/css" href="../../static/css/index.css" th:href="@{/css/index.css}">
 </head>
 <body>
 <nav class="navbar navbar-expand-lg navbar-dark bg-primary">
@@ -24,13 +24,13 @@
   <div class="collapse navbar-collapse" id="navbarNav">
     <ul class="navbar-nav ml-auto">
       <li class="nav-item" >
-        <a class="nav-link" th:href="@{/posts}" href="../templates/index.html">Inicio</a>
+        <a class="nav-link" th:href="@{/posts}" href="../index.html">Inicio</a>
       </li>
       <li class="nav-item" sec:authorize="!isAuthenticated()">
-        <a class="nav-link" th:href="@{/contact}" href="contact.html" >Contacto</a>
+        <a class="nav-link" th:href="@{/contact}" href="../contact/contact.html" >Contacto</a>
       </li >
       <li class="nav-item" sec:authorize="!isAuthenticated()">
-        <a class="nav-link" th:href="@{/login}" href="../templates/index.html">Iniciar sesion</a>
+        <a class="nav-link" th:href="@{/login}" href="../index.html">Iniciar sesion</a>
       </li>
       <li sec:authorize="isAuthenticated()" class="dropdown show">
         <a class="btn btn-outline-success dropdown-toggle" href="#"
@@ -40,7 +40,6 @@
         </a>
         <div class="dropdown-menu dropdown-menu-right" th:object="${user}">
           <a class="dropdown-item" th:href="@{/user/{id}(id=${user.id})}" >Perfil</a>
-          <a class="dropdown-item" th:href="@{/user/posts/{id}(id=${user.id})}" >Mis posts</a>
           <a class="dropdown-item" th:href="@{/posts/add}" >Agregar nuevo post</a>
           <a class="dropdown-item" th:href="@{/contact}" >Contacto</a>
           <div class="dropdown-item" aria-labelledby="dropdownMenuLink">
@@ -55,41 +54,16 @@
   </div>
 </nav>
 <br>
-<div class="container-fluid h-100 ">
-  <div class="row justify-content-center align-items-center h-100 ">
-    <div class="col-md-4">
-      <div class="modal-content">
-        <div class="card-header">
-      <h2 class="text-center col-12 forgot">Contacto</h2>
-      <hr>
-      <form th:action="@{/contact}" th:object="${contactDTO}"  method="post" enctype="multipart/form-data" class="col-12"  >
-        <div  sec:authorize="isAuthenticated()">
-        <div class="form-group"  >
-          <input type="text" class="form-control" id="nameauth" name="nameauth" th:field="*{name}"   th:value="${contactDTO.name}"  required>
-        </div>
-        <div class="form-group">
-          <input type="email" class="form-control" id="emailauth" name="emailauth" th:field="*{email}"  th:value="${contactDTO.email}"   required>
-        </div>
-        </div>
-        <div sec:authorize="!isAuthenticated()">
-        <div class="form-group">
-          <input type="text" class="form-control" id="name" name="name" th:field="*{name}"   placeholder="Nombre Completo"  required>
-        </div>
-        <div class="form-group">
-          <input type="email" class="form-control" id="email" name="email" th:field="*{email}"  placeholder="Correo"  required>
-        </div>
-      </div>
-        <div class="form-group">
-          <input type="text" class="form-control" id="subject" name="subject" th:field="*{subject}" placeholder="Asunto"  required>
-        </div>
-        <div class="form-group">
-          <textarea class="form-control" id="message" name="message" th:field="*{message}" placeholder="Mensaje"  required></textarea>
-        </div>
-        <div class="text-center">
-          <button type="submit" class="btn btn-primary">Enviar mensaje</button>
-        </div>
-      </form>
-        </div>
+<br>
+<div class="container">
+  <div class="row">
+    <!--card-->
+    <div th:each="post : ${posts}" class="card" style="width: 18rem;">
+      <img th:src="${post.urlImg}" class="card-img-top" src="" alt="Card image cap">
+      <div class="card-body">
+        <h5 th:text="${post.title}" class="card-title">Card title</h5>
+        <!--<p th:text="${post.description}" class="card-text"></p>-->
+        <a th:href="@{/posts/post/{id}(id=${post.id})}"  class="btn btn-primary">Ver post</a>
       </div>
     </div>
   </div>

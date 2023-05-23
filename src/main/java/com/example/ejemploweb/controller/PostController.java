@@ -46,7 +46,7 @@ public class PostController {
     @GetMapping("/posts/post/{id}")
     public String getOnePost(@PathVariable Long id, Model model) {
         model.addAttribute("onePost", postService.getPostById(id));
-        return "post";
+        return "post/post";
     }
 
     @GetMapping("/posts/add")
@@ -55,7 +55,7 @@ public class PostController {
         model.addAttribute("post", post);
         model.addAttribute("categories", categoryPostService.getAllCategoryPost());
 
-        return "add";
+        return "post/add";
     }
 
     @PostMapping("/posts/add")
