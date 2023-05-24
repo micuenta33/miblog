@@ -3,9 +3,6 @@ package com.example.ejemploweb.DTO;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import org.springframework.stereotype.Component;
-
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
