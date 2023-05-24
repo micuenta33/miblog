@@ -14,7 +14,7 @@
 	<name>ejemploweb</name>
 	<description>Demo project for Spring Boot</description>
 	<properties>
-		<java.version>11</java.version>
+		<java.version>17</java.version>
 	</properties>
 	<dependencies>
 		<dependency>
@@ -77,8 +77,6 @@
 				<groupId>org.springframework.boot</groupId>
 				<artifactId>spring-boot-maven-plugin</artifactId>
 				<configuration>
-					<source>11</source>
-					<target>11</target>
 					<excludes>
 						<exclude>
 							<groupId>org.projectlombok</groupId>
