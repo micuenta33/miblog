@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Detalles del Post</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+          integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+          crossorigin="anonymous"/>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css"/>
+    <link rel="stylesheet" type="text/css" href="../../static/css/post.css" th:href="@{/css/post.css}">
+
+</head>
+<body>
+<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
+    <h1 class="navbar-brand">Salud & Fitness</h1>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNav"
+            aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+        <ul class="navbar-nav ml-auto">
+            <li class="nav-item">
+                <a class="nav-link" th:href="@{/posts}" href="../index.html">Inicio</a>
+            </li>
+        </ul>
+    </div>
+</nav>
+<div class="container-fluid h-100 ">
+    <div class="row justify-content-center align-items-center h-100 ">
+        <div class="col-md-8">
+            <div class="modal-content">
+                <div class="card-header" >
+                    <div class="row" th:object="${onePost}" th:with="postId=${onePost.id}">
+                        <div class="col-md-12">
+                            <h2 th:text="${onePost.title}"></h2>
+                            <hr>
+                            <br>
+                            <img class="card-img-top" th:src="${onePost.urlImg}" alt="Imagen del Post" >
+                            <pre class="formatted-text" th:text="${onePost.description}"></pre>
+                            <p class="" th:text="${onePost.createdDate}"></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+
+</body>
+</html>
